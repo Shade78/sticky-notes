@@ -1,4 +1,5 @@
-// more readable use of build-in methods of Appwrite web SDK,
+/* more readable use of build-in methods of Appwrite web SDK
+ for example check init function in NotesPage.jsx */
 
 import { databases, collections } from "./config";
 import { ID } from "appwrite";

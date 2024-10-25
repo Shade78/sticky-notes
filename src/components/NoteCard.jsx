@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { db } from "../appwrite/databases";
 import Trash from "../icons/Trash";
 import { setNewOffset, autoGrow, setZIndex, bodyParser } from "../utils";
 
@@ -29,6 +30,20 @@ const NoteCard = ({ note }) => {
   const mouseUp = () => {
     document.removeEventListener("mousemove", mouseMove);
     document.removeEventListener("mouseup", mouseUp);
+
+    const newPosition = setNewOffset(cardRef.current);
+    saveData("position", newPosition);
+    // db.notes.update(note.$id, { position: JSON.stringify(newPosition) });  created function to make it clean
+  };
+
+  const saveData = async (key, value) => {
+    const payload = { [key]: JSON.stringify(value) };
+
+    try {
+      await db.notes.update(note.$id, payload);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const mouseMove = (e) => {
