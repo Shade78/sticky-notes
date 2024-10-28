@@ -6,6 +6,7 @@ import { ID } from "appwrite";
 
 const db = {};
 
+// https://www.youtube.com/watch?v=1ip2aljprvg
 collections.forEach((collection) => {
   db[collection.name] = {
     create: async (payload, id = ID.unique()) => {
